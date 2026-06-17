@@ -11,11 +11,14 @@ import {
 import { Fragment } from "react";
 import cn from "clsx";
 import * as Sentry from "@sentry/react-native";
+import useAuthStore from "@/store/auth.store";
 
 import CartButton from "@/components/CartButton";
 import { images, offers } from "@/constants";
 
 export default function Index() {
+  const { user } = useAuthStore();
+  console.log("User:", user);
   return (
     <SafeAreaView className="flex-1 bg-white">
       <FlatList

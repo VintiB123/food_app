@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { User } from "@/types";
+import { User } from "../type";
 import { getCurrentUser } from "@/lib/appwrite";
 
 type AuthState = {
@@ -24,6 +24,7 @@ const useAuthStore = create<AuthState>((set) => ({
   setLoading: (value) => set({ isLoading: value }),
 
   fetchAuthenticatedUser: async () => {
+    console.log("fetchAuthenticatedUser called");
     set({ isLoading: true });
 
     try {
@@ -36,6 +37,10 @@ const useAuthStore = create<AuthState>((set) => ({
       }
     } catch (e) {
       console.log("fetchAuthenticatedUser error", e);
+      // Only log on first call to avoid spam
+      if (e instanceof Error) {
+        console.error("Appwrite connection error:", e.message);
+      }
       set({ isAuthenticated: false, user: null });
     } finally {
       set({ isLoading: false });

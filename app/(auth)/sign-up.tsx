@@ -24,7 +24,7 @@ const SignUp = () => {
       });
 
       // Alert.alert("Success", "User signed up successfully");
-      router.replace("./");
+      router.replace("/");
     } catch (error: any) {
       Alert.alert("Error", error.message);
     } finally {
@@ -60,7 +60,7 @@ const SignUp = () => {
         secureTextEntry
         keyboardType="default"
       />
-      <CustomButton title="Sign In" isLoading={isSubmitting} onPress={submit} />
+      <CustomButton title="Sign Up" isLoading={isSubmitting} onPress={submit} />
       <View className="flex justify-center mt-5 flex-row gap-2">
         <Text className="base-regular text-gray-100">
           Already have an account?

@@ -8,14 +8,15 @@ import {
   ImageBackground,
   Image,
 } from "react-native";
-import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Slot } from "expo-router";
+import { Redirect, Slot } from "expo-router";
 import { images } from "@/constants";
-import CustomButton from "@/components/CustomButton";
-import CustomInput from "@/components/CustomInput";
+import useAuthStore from "@/store/auth.store";
 
-export default function _Layout() {
+export default function AuthLayout() {
+  const { isAuthenticated } = useAuthStore();
+  console.log("AuthLayout render", isAuthenticated);
+  if (isAuthenticated) return <Redirect href="/" />;
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -38,7 +39,6 @@ export default function _Layout() {
             className="self-center size-48 absolute -bottom-16 z-10"
           />
         </View>
-
         <Slot />
       </ScrollView>
     </KeyboardAvoidingView>
